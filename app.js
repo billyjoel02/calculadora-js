@@ -3,31 +3,31 @@ const $d = document,
     $operaciones = $d.querySelectorAll('.button-operacion'),
     $panel = $d.querySelector('.panel-numeros .info'),
     $panel1 = $d.querySelector('.panel-numeros .resultado');
-let num1="", num2="", oper = "", resultado;
+let operA="", operB="", oper = "", resultado;
 
 $numeros.forEach(($b)=>{
     $b.addEventListener("click",()=> {
         if(oper!=="") {
-            num2 += $b.textContent;
+            operB += $b.textContent;
             $panel1.textContent += $b.textContent;
         } else {
             $panel.innerHTML += $b.textContent;
-            num1 += $b.textContent;
-            console.log(num1);
+            operA += $b.textContent;
+            console.log(operA);
         }
     });
 });
 
 $d.querySelector('.button-igual').addEventListener("click", ()=> {
-    if(num1!=="" && num2 !== "") resultadoOperacion(oper);
+    if(operA!=="" && operB !== "") resultadoOperacion(oper);
 });
 
 $operaciones.forEach(($o)=>{
     $o.addEventListener("click",()=> {
-        if(num1!=="") {
+        if(operA!=="") {
             $panel1.innerHTML = '';
             $panel.innerHTML='';
-            $panel.innerHTML += `${num1} ${$o.textContent}`;
+            $panel.innerHTML += `${operA} ${$o.textContent}`;
             oper = $o.textContent;
         }
     });
@@ -36,20 +36,20 @@ $operaciones.forEach(($o)=>{
 $d.querySelector(".vaciar").addEventListener("click",() => {
     $panel.innerHTML ="";
     $panel1.innerHTML ="";
-    num1="";
-    num2="";
+    operA="";
+    operB="";
     oper="";
 });
 
 function resultadoOperacion(o) {
     switch(o) {
-        case '+': resultado  =  +num1 + +num2; break;
-        case '*': resultado  =  +num1 * +num2; break;
-        case '/': resultado  =  +num1 / +num2; break;
-        case '-': resultado  =  +num1 - +num2; break;
+        case '+': resultado  =  +operA + +operB; break;
+        case '*': resultado  =  +operA * +operB; break;
+        case '/': resultado  =  +operA / +operB; break;
+        case '-': resultado  =  +operA - +operB; break;
     }
-    $panel.textContent = `${num1} ${oper} ${num2} = `;
+    $panel.textContent = `${operA} ${oper} ${operB} = `;
     $panel1.textContent = resultado;
-    num1 = resultado;
-    num2 = "";
+    operA = resultado;
+    operB = "";
 }
